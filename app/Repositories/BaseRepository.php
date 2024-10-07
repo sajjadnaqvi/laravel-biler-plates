@@ -43,9 +43,9 @@ class BaseRepositiry
         return $this->model->timestamps ? $query->latest() : $query->latest("id");
     }
 
-    public function getLatest()
+    public function getLatest($columns = ['*'])
     {
-        return $this->latest()->get();
+        return $this->latest()->get($columns);
     }
 
     /**
@@ -104,9 +104,9 @@ class BaseRepositiry
      * @param int|null $perPage
      * @return mixed
      */
-    public function paginate($perPage = null)
+    public function paginate($perPage = null, $columns = ['*'])
     {
-        return $this->model->paginate($perPage);
+        return $this->model->paginate($perPage, $columns);
     }
 
     /**
@@ -152,7 +152,7 @@ class BaseRepositiry
         return $this->model::singleInfo()->findorfail($id);
     }
 
-    public function getPaginated($data = [])
+    public function getPaginated($data = [], $columns = ['*'])
     {
         $pagination_length = $data["page_size"] ?? 10;
         $query = $this->model::listingInfo()->filters($data);
@@ -160,6 +160,6 @@ class BaseRepositiry
         //Boolean: checking Is model has timestamps `true or false`
         $this->model->timestamps ? $query->latest() : $query->latest("id");
 
-        return $query->paginate($pagination_length);
+        return $query->paginate($pagination_length, $columns);
     }
 }
