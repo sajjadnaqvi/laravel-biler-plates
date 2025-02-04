@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepositiry
+class BaseRepository
 {
     /**
      * @var Model
