@@ -10,7 +10,7 @@ class AuthController extends Controller
 
     private $userRepository;
     
-    public function __contruct( IUserRepository $userRepository) {
+    public function __construct( IUserRepository $userRepository) {
         $this->userRepository = $userRepository;
     }
 
@@ -20,6 +20,7 @@ class AuthController extends Controller
         try {
             $this->userRepository->storeValidation($data)->validate();
             $this->userRepository->store($data);
+            return response()->success("User created successfully");
 
         } catch (\Exception $e) {
             return $this->handleException($e);

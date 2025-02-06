@@ -17,7 +17,7 @@ class UserRepository extends BaseRepository implements IUserRepository
     public function store(array $data)
     {
         $data['password'] = Hash::make($data['password']);
-        return $this->model->created($data);
+        return $this->model->create($data);
     }
 
     public function storeValidation(array $data) {
