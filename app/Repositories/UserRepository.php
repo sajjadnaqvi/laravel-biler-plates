@@ -28,4 +28,17 @@ class UserRepository extends BaseRepository implements IUserRepository
         ]);
     }
 
+    public function loginValidation(array $data) {
+        return Validator::make($data, [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required',
+        ]);
+    }
+
+
+    public function generateAuthenticationToken($user)
+    {
+        return $user->createToken('authToken')->plainTextToken;
+    }
+
 }
